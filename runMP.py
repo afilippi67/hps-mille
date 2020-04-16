@@ -111,7 +111,8 @@ def buildSteerFile(name,inputfiles,pars,minimStr,surveyConstraints=False,beamspo
             f.write("\n\n")
 
         if beamspotConstraints:
-            f.write(buildSteering.getBeamspotConstraints(paramMap))
+#            f.write(buildSteering.getBeamspotConstraints(paramMap))
+            f.write(buildSteering.getBeamspotConstraintsFloatingOnly(pars))
             f.write("\n\n")
         
         f.write("\n\n")

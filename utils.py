@@ -7,6 +7,26 @@ beamspotAxialId = 99
 beamspotStereoId = 98
 
 
+class FloatOption:
+    def __init__(self,name):
+        self.name = name
+        self.float = []
+    def add(self, listOfObj):
+        self.float.append(listOfObj)
+    def getName(self):
+        return self.name
+    def get(self,i):
+        return self.float[i]
+    def getNIter(self):
+        return len(self.float)
+    def toString(self):
+        s = self.name + ':\n'
+        i=0
+        s += '%10s  %s\n' % ('Iteration', 'Floating')
+        for v in self.float:
+            s += '%10d  %s\n' % (i,v)
+            i=i+1
+        return s
 
 
 class Parameter:
@@ -125,6 +145,7 @@ def getResResults(mpresfile='millepede.res', ignoreZero=False):
         print 'cannot open res file ' 
         return result
     else:
+        print mpresfile
         active=False
         for l in f.readlines():
             if active:
@@ -270,10 +291,11 @@ def getMinimStr(filename):
 
 
 def getRunNr(name):
-    m = re.search('hps_00(\d{4})\S',name)
+#    m = re.search('hps_00(\d{4})\S',name)
+    m = re.search('00(\d{4})\S',name)
     if m==None:
         print 'Cannot find run number from ', name
-        sys.exit(1)
+#        sys.exit(1)
     else:
         return int(m.group(1))
 
